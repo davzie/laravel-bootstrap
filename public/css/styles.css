@@ -1,0 +1,8 @@
+/* Generic Shit */
+.alert { text-align:left; }
+.alert p { margin-bottom:0; padding-bottom:0; }
+
+/* Main Interface Area */
+body.interface{
+    padding-top:71px;
+}

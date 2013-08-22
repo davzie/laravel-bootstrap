@@ -1,0 +1,25 @@
+{
+    "name": "davzie/laravel-bootstrap",
+    "description": "A Laravel 4 Based CMS Built With Twitter Bootstrap 3",
+    "authors": [
+        {
+            "name": "David Thorpe",
+            "email": "davzie@davzie.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x",
+        "intervention/image": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations",
+            "src/controllers"
+        ],
+        "psr-0": {
+            "Davzie\\LaravelBootstrap": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
