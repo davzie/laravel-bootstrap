@@ -1,7 +1,7 @@
 @extends('laravel-bootstrap::layouts.interface')
 
 @section('title')
-    Welcome To Your CMS
+    {{ $app_name }}
 @stop
 
 @section('content')
