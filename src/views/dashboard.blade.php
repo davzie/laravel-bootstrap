@@ -7,8 +7,8 @@
 @section('content')
 
     <h1>Welcome To {{ $app_name }}</h1>
-    <p class="lead">Manage content for your website, including but not limited to:</p>
-    <ul class="lead">
+    <p>Manage content for your website, including but not limited to:</p>
+    <ul>
         <li>Posts</li>
         <li>Content Blocks</li>
         <li>Image Galleries</li>
