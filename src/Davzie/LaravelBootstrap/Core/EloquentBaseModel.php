@@ -7,13 +7,16 @@ class EloquentBaseModel extends Eloquent
     protected $validationRules = [];
     protected $validator;
 
-    public function isValid()
+    public function isValid( $data = array() )
     {
         if ( ! isset($this->validationRules) or empty($this->validationRules)) {
             throw new NoValidationRulesFoundException('no validation rules found in class ' . get_called_class());
         }
 
-        $this->validator = Validator::make($this->getAttributes(), $this->getPreparedRules());
+        if( !$data )
+            $data = $this->getAttributes();
+
+        $this->validator = Validator::make( $data , $this->getPreparedRules() );
 
         return $this->validator->passes();
     }

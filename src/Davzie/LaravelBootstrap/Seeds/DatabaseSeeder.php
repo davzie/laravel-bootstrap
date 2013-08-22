@@ -9,6 +9,7 @@ class DatabaseSeeder extends Seeder {
     {
         Eloquent::unguard();
         $this->call('Davzie\LaravelBootstrap\Seeds\UserTable');
+        $this->call('Davzie\LaravelBootstrap\Seeds\ExampleSettingsSeeder');
         $this->command->info('All Tables Seeded');
     }
 

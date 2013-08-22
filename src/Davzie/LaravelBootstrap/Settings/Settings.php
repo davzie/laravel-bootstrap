@@ -14,10 +14,10 @@ class Settings extends EloquentBaseModel
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = array('value');
+    protected $fillable = array( 'id' , 'value');
 
     protected $validationRules = [
-        'key'      => 'required|unique:settings,<id>',
+        'id'      => 'required|exists:settings',
         'value'   => 'required'
     ];
 
