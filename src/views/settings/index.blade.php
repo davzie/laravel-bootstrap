@@ -9,7 +9,7 @@
     <h1>Website Settings</h1>
     <p>Update settings related to your website below:</p>
     @if($items)
-        {{ Form::open( array( 'url'=>"$urlSegment/settings" , 'class'=>'form-horizontal' , 'role'=>'form' ) ) }}
+        {{ Form::open( array( 'url'=>$object_url , 'class'=>'form-horizontal' , 'role'=>'form' ) ) }}
 
             {{-- The error / success messaging partial --}}
             @include('laravel-bootstrap::partials.messaging')

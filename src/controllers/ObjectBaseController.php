@@ -1,6 +1,7 @@
 <?php namespace Davzie\LaravelBootstrap\Controllers;
 use Illuminate\Support\MessageBag;
-use View, Redirect, Input;
+use View, Redirect, Input, App;
+use Davzie\LaravelBootstrap\Core\Exceptions\EntityNotFoundException;
 
 abstract class ObjectBaseController extends BaseController {
 
@@ -16,6 +17,30 @@ abstract class ObjectBaseController extends BaseController {
     protected $view_key;
 
     /**
+     * The URL to get the root of this object ( /admin/posts for example )
+     * @var string
+     */
+    protected $object_url;
+
+    /**
+     * The URL that is used to edit shit
+     * @var string
+     */
+    protected $edit_url;
+
+    /**
+     * The URL to create a new entry
+     * @var string
+     */
+    protected $new_url;
+
+    /**
+     * The URL to delete an entry
+     * @var string
+     */
+    protected $delete_url;
+
+    /**
      * Is the controller allowed to upload images?
      * @var boolean
      */
@@ -26,6 +51,13 @@ abstract class ObjectBaseController extends BaseController {
      * @var boolean
      */
     protected $deletable = true;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setHandyUrls();
+        $this->shareHandyUrls();
+    }
 
     /**
      * Main users page.
@@ -52,6 +84,25 @@ abstract class ObjectBaseController extends BaseController {
     }
 
     /**
+     * The generic method for the start of editing something
+     * @return View
+     */
+    public function getEdit( $id )
+    {
+        try{
+            $item = $this->model->requireById($id);
+        } catch( EntityNotFoundException $e ){
+            return Redirect::to( $this->object_url )->with('errors', new MessageBag( array("An item with the ID:$id could not be found.") ) );
+        }
+        
+        if( !View::exists( 'laravel-bootstrap::'.$this->view_key.'.edit' ) )
+            return App::abort(404, 'Page not found');
+
+        return View::make('laravel-bootstrap::'.$this->view_key.'.edit')
+                    ->with( 'item' , $item );
+    }
+
+    /**
      * Delete an object based on the ID passed in
      * @param  integer $id The object ID
      * @return Redirect
@@ -60,9 +111,9 @@ abstract class ObjectBaseController extends BaseController {
         if( $this->deletable == false )
             return App::abort(404, 'Page not found');
 
-        $this->model->find($id)->delete();
+        $this->model->getById($id)->delete();
         $message = 'The item was successfully removed.';
-        return Redirect::to( $this->urlSegment.'/'.$this->view_key )
+        return Redirect::to( $this->object_url )
                          ->with('success', new MessageBag( array( $message ) ) );
     }
 
@@ -89,6 +140,39 @@ abstract class ObjectBaseController extends BaseController {
             Response::json('error', 400);
 
         return Response::json('error', 400);
+    }
+
+    /**
+     * Set the URL's to be used in the views
+     * @return void
+     */
+    private function setHandyUrls()
+    {
+        if( is_null( $this->object_url ) )
+            $this->object_url = url($this->urlSegment.'/'.$this->view_key);
+
+        if( is_null( $this->edit_url ) )
+            $this->edit_url = $this->object_url.'/edit/';
+
+        if( is_null( $this->new_url ) )
+            $this->new_url = $this->object_url.'/new';
+
+        if( is_null( $this->delete_url ) )
+            $this->delete_url = $this->object_url.'/delete/';
+    }
+
+    /**
+     * Set the view to have variables detailing some of the key URL's used in the views
+     * Trying to keep views generic...
+     * @return void
+     */
+    private function shareHandyUrls()
+    {
+        // Share these variables with any views
+        View::share('object_url', $this->object_url);
+        View::share('edit_url', $this->edit_url);
+        View::share('new_url', $this->new_url);
+        View::share('delete_url', $this->delete_url);
     }
 
 }
