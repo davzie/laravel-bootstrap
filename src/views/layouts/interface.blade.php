@@ -12,6 +12,7 @@
         @section('css')
             <link rel="stylesheet" href="{{ asset('packages/davzie/laravel-bootstrap/css/bootstrap.min.css') }}">
             <link rel="stylesheet" href="{{ asset('packages/davzie/laravel-bootstrap/css/styles.css') }}">
+            <link rel="stylesheet" href="{{ asset('packages/davzie/laravel-bootstrap/css/jquery.tagsinput.min.css') }}">
         @show
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -92,6 +93,17 @@
         @section('scripts')
             <script src="{{ asset('packages/davzie/laravel-bootstrap/js/jquery.js') }}"></script>
             <script src="{{ asset('packages/davzie/laravel-bootstrap/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('packages/davzie/laravel-bootstrap/js/jquery.tagsinput.min.js') }}"></script>
+            <script>
+                $(document).ready(function(){
+                    var taggables = $('input[name="tags"]');
+
+                    if( taggables.length )
+                        $(taggables).tagsInput({});
+                    
+
+                });
+            </script>
         @show
     </body>
 </html>

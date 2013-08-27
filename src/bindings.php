@@ -14,3 +14,13 @@ App::bind('Davzie\LaravelBootstrap\Settings\SettingsInterface', function(){
 App::bind('Davzie\LaravelBootstrap\Blocks\BlocksInterface', function(){
     return new Davzie\LaravelBootstrap\Blocks\BlocksRepository( new Davzie\LaravelBootstrap\Blocks\Blocks );
 });
+
+// The Tags Bindings
+App::bind('Davzie\LaravelBootstrap\Tags\TagsInterface', function(){
+    return new Davzie\LaravelBootstrap\Tags\TagsRepository( new Davzie\LaravelBootstrap\Tags\Tags );
+});
+
+// The Uploads Bindings
+App::bind('Davzie\LaravelBootstrap\Uploads\UploadsInterface', function(){
+    return new Davzie\LaravelBootstrap\Uploads\UploadsRepository( new Davzie\LaravelBootstrap\Uploads\Uploads );
+});

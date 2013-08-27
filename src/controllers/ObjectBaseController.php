@@ -1,6 +1,6 @@
 <?php namespace Davzie\LaravelBootstrap\Controllers;
 use Illuminate\Support\MessageBag;
-use View, Redirect, Input, App;
+use View, Redirect, Input, App, ReflectionClass;
 use Davzie\LaravelBootstrap\Core\Exceptions\EntityNotFoundException;
 
 abstract class ObjectBaseController extends BaseController {
@@ -44,7 +44,13 @@ abstract class ObjectBaseController extends BaseController {
      * Is the controller allowed to upload images?
      * @var boolean
      */
-    protected $uploadable = false;
+    protected $uploadable;
+
+    /**
+     * Is the controller allowed to have tags?
+     * @var boolean
+     */
+    protected $taggable;
 
     /**
      * Can items be deleted?
@@ -57,6 +63,8 @@ abstract class ObjectBaseController extends BaseController {
         parent::__construct();
         $this->setHandyUrls();
         $this->shareHandyUrls();
+        $this->setTraitableProperties();
+        $this->setViewObjectAbilities();
     }
 
     /**
@@ -173,6 +181,30 @@ abstract class ObjectBaseController extends BaseController {
         View::share('edit_url', $this->edit_url);
         View::share('new_url', $this->new_url);
         View::share('delete_url', $this->delete_url);
+    }
+
+    /**
+     * Set the view variables for this object. If you can upload tell it, if you can tag, tell it.
+     * @return void
+     */
+    private function setViewObjectAbilities()
+    {
+        View::share('uploadable', $this->uploadable);
+        View::share('taggable', $this->taggable);
+    }
+
+    /**
+     * Set the class properties for if this object should allow uploads or tags
+     * Uses reflection to check the model to see if it uses a taggable / uploadable trait
+     */
+    private function setTraitableProperties()
+    {
+        if( is_null( $this->taggable ) )
+            $this->taggable = in_array( 'Davzie\LaravelBootstrap\Abstracts\Traits\TaggableRelationship' , ( new ReflectionClass( $this->model->getModel() ) )->getTraitNames() );
+
+        if( is_null( $this->uploadable ) )
+            $this->uploadable = in_array( 'Davzie\LaravelBootstrap\Abstracts\Traits\UploadableRelationship' , ( new ReflectionClass( $this->model->getModel() ) )->getTraitNames() );
+
     }
 
 }
