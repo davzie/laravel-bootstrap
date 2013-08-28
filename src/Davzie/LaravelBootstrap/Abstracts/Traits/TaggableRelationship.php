@@ -1,4 +1,5 @@
 <?php namespace Davzie\LaravelBootstrap\Abstracts\Traits;
+use Davzie\LaravelBootstrap\Tags\Tags as TagEloquent;
 
 trait TaggableRelationship
 {
@@ -23,6 +24,27 @@ trait TaggableRelationship
             $tags[] = $tag->tag;
 
         return implode( ',' , $tags );
+    }
+
+    /**
+     * Save tags, pass in a CSV separated list
+     * @param  string $tags A comma separated list of tags
+     * @return void
+     */
+    public function saveTags( $tags )
+    {
+        // Delete all existing tags for this item
+        $this->tags()->delete();
+
+        if( $tags = explode(',',$tags) ){
+            foreach($tags as $tag){
+                $tagObject = new TagEloquent();
+                $tagObject->tag = $tag;
+                $this->tags()->save( $tagObject );
+            }
+        }
+
+        return;
     }
 
 }

@@ -27,19 +27,16 @@ class PostsController extends ObjectBaseController {
     public function postEdit( $id )
     {
         $record = $this->model->requireById( $id );
+        $record->fill( Input::all() );
 
-        if( !$record )
-            return Redirect::to( $this->object_url )->with( 'errors' , new MessageBag( array( 'No record found with ID: '.$id ) ) );
-
-        $record->title = Input::get('title');
-        $record->slug = Str::slug( Input::get('title') , '-' );
-        $record->content = Input::get('content');
-
-        if( !$record->isValid( Input::all() ) )
+        if( !$record->isValid() )
             return Redirect::to( $this->edit_url.$id )->with( 'errors' , $record->getErrors() );
 
-        $record->save();
+        // Run the hydration method that populates anything else that is required / runs any other
+        // model interactions and save it.
+        $record->hydrate()->save();
 
+        // Redirect that shit man! You did good! Validated and saved, man mum would be proud!
         return Redirect::to( $this->object_url )->with( 'success' , new MessageBag( array( 'Item Saved' ) ) );
     }
 

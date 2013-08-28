@@ -206,5 +206,5 @@ abstract class ObjectBaseController extends BaseController {
             $this->uploadable = in_array( 'Davzie\LaravelBootstrap\Abstracts\Traits\UploadableRelationship' , ( new ReflectionClass( $this->model->getModel() ) )->getTraitNames() );
 
     }
-
+    
 }
