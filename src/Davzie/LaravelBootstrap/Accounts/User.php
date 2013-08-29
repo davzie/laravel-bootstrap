@@ -7,9 +7,6 @@ class User extends EloquentBaseModel implements LaravelUserInterface, Remindable
 {
     protected $table    = 'users';
 
-    // Never actually delete shit, just 'soft delete' that bad-boy
-    protected $softDelete = true;
-
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -43,7 +40,7 @@ class User extends EloquentBaseModel implements LaravelUserInterface, Remindable
      * Get the full name of the user
      * @return string
      */
-    public function getFullName(){
+    public function getFullNameAttribute(){
         return $this->first_name.' '.$this->last_name;
     }
 

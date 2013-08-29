@@ -64,7 +64,7 @@
 
                             if( this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0 ){
                                 // Submit dat form
-                                // $('#item-form').submit();
+                                $('#item-form').submit();
                             }
 
                         });

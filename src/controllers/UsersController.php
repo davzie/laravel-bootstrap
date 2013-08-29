@@ -1,20 +1,20 @@
 <?php namespace Davzie\LaravelBootstrap\Controllers;
-use Davzie\LaravelBootstrap\Blocks\BlocksInterface;
+use Davzie\LaravelBootstrap\Accounts\UserInterface;
 
-class BlocksController extends ObjectBaseController {
+class UsersController extends ObjectBaseController {
 
     /**
      * The place to find the views / URL keys for this controller
      * @var string
      */
-    protected $view_key = 'blocks';
+    protected $view_key = 'users';
 
     /**
      * Construct Shit
      */
-    public function __construct( BlocksInterface $blocks )
+    public function __construct( UserInterface $users )
     {
-        $this->model = $blocks;
+        $this->model = $users;
         parent::__construct();
     }
 

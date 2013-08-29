@@ -5,6 +5,11 @@ App::bind('Davzie\LaravelBootstrap\Posts\PostsInterface', function(){
     return new Davzie\LaravelBootstrap\Posts\PostsRepository( new Davzie\LaravelBootstrap\Posts\Posts );
 });
 
+// The Posts Bindings
+App::bind('Davzie\LaravelBootstrap\Accounts\UserInterface', function(){
+    return new Davzie\LaravelBootstrap\Accounts\UserRepository( new Davzie\LaravelBootstrap\Accounts\User );
+});
+
 // The Settings Bindings
 App::bind('Davzie\LaravelBootstrap\Settings\SettingsInterface', function(){
     return new Davzie\LaravelBootstrap\Settings\SettingsRepository( new Davzie\LaravelBootstrap\Settings\Settings );
@@ -23,4 +28,9 @@ App::bind('Davzie\LaravelBootstrap\Tags\TagsInterface', function(){
 // The Uploads Bindings
 App::bind('Davzie\LaravelBootstrap\Uploads\UploadsInterface', function(){
     return new Davzie\LaravelBootstrap\Uploads\UploadsRepository( new Davzie\LaravelBootstrap\Uploads\Uploads );
+});
+
+// The Uploads Bindings
+App::bind('Davzie\LaravelBootstrap\Galleries\GalleriesInterface', function(){
+    return new Davzie\LaravelBootstrap\Galleries\GalleriesRepository( new Davzie\LaravelBootstrap\Galleries\Galleries );
 });

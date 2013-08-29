@@ -14,10 +14,4 @@ interface PostsInterface {
      */
     public function getAllByDateDesc();
 
-    /**
-     * Get all posts that have a tag of the type passed in
-     * @return Posts
-     */
-    public function getAllByTag( $tag );
-
 }
