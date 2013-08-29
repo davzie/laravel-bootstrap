@@ -3,6 +3,12 @@
 interface UploadsInterface {
 
     /**
+     * Get all uploads in order of upload
+     * @return Uploads
+     */
+    public function getInOrder();
+
+    /**
      * Delete an upload by it's database ID
      * @param  mixed[integer|array]     $id     The database ID
      * @return boolean                          True if deleted
@@ -22,5 +28,14 @@ interface UploadsInterface {
      * @param array $ids The Upload IDs
      */
     public function setOrder( $ids );
+
+    /**
+     * Upload an image to an object type and ID along with key
+     * @param  integer $id   The ID of the object to associate with
+     * @param  string  $type The class name of the model to associate with
+     * @param  string  $key  The key used in the directory heirachy
+     * @return void
+     */
+    public function doUpload( $id , $type , $key );
 
 }

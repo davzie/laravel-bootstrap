@@ -9,7 +9,7 @@ trait UploadableRelationship
      */
     public function uploads()
     {
-        return $this->morphMany( 'Davzie\LaravelBootstrap\Uploads\Uploads' , 'uploadable' );
+        return $this->morphMany( 'Davzie\LaravelBootstrap\Uploads\Uploads' , 'uploadable' )->orderBy('order','asc');
     }
 
 }

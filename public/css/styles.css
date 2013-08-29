@@ -10,3 +10,6 @@ body.interface{
 .form-top-margin{
     margin-top:15px;
 }
+.thumbnail .image-container{ height:150px; overflow:hidden; display:block; }
+.thumbnail .image-container img{  max-height:150px; display:block; margin:0 auto; border-radius:3px; }
+.thumbnail .caption {  font-size:12px; }

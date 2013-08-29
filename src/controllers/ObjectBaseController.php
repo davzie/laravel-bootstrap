@@ -1,6 +1,6 @@
 <?php namespace Davzie\LaravelBootstrap\Controllers;
 use Illuminate\Support\MessageBag;
-use View, Redirect, Input, App, ReflectionClass;
+use View, Redirect, Input, App, ReflectionClass, Request, Config, Response;
 use Davzie\LaravelBootstrap\Core\Exceptions\EntityNotFoundException;
 
 abstract class ObjectBaseController extends BaseController {
@@ -58,9 +58,17 @@ abstract class ObjectBaseController extends BaseController {
      */
     protected $deletable = true;
 
+    /**
+     * The uploads model
+     * @var UploadsInterface
+     */
+    protected $uploads_model;
+
     public function __construct()
     {
         parent::__construct();
+        $this->uploads_model = App::make('Davzie\LaravelBootstrap\Uploads\UploadsInterface');
+
         $this->setHandyUrls();
         $this->shareHandyUrls();
         $this->setTraitableProperties();
@@ -163,7 +171,7 @@ abstract class ObjectBaseController extends BaseController {
         $record->hydrate()->save();
 
         // Redirect that shit man! You did good! Validated and saved, man mum would be proud!
-        return Redirect::to( $this->object_url )->with( 'success' , new MessageBag( array( 'Item Saved' ) ) );
+        return Redirect::to( $this->edit_url.$id )->with( 'success' , new MessageBag( array( 'Item Saved' ) ) );
     }
 
     /**
@@ -171,12 +179,17 @@ abstract class ObjectBaseController extends BaseController {
      * @return Response
      */
     public function postUpload( $id ){
+
         // This should only be accessible via AJAX you know...
-        if( !Request::ajax() or $this->uploadable == false )
+        if( !Request::ajax() or !$this->model->getById( $id ) )
             Response::json('error', 400);
 
-        return Response::json('error', 400);
+        $success = $this->uploads_model->doUpload( $id , get_class( $this->model->getModel() ) , $this->view_key );
 
+        if(!$success)
+            Response::json('error', 400);
+
+        return Response::json('success', 200);
     }
 
     /**
@@ -185,10 +198,13 @@ abstract class ObjectBaseController extends BaseController {
      */
     public function postOrderImages(){
         // This should only be accessible via AJAX you know...
-        if( !Request::ajax() or $this->uploadable == false  )
+        if( !Request::ajax() )
             Response::json('error', 400);
 
-        return Response::json('error', 400);
+        // Ensure that the product images that need to be deleted get deleted
+        $this->uploads_model->setOrder( Input::get('data') );
+
+        return Response::json('success', 200);
     }
 
     /**
