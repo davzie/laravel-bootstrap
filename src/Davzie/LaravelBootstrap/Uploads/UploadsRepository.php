@@ -56,10 +56,10 @@ class UploadsRepository extends EloquentBaseRepository implements UploadsInterfa
             $id = array( $id );
 
         // Delete The Items From The File Store
-        $this->physicallyDelete( $this->whereIn( 'id' , $id )->get() );
+        $this->physicallyDelete( $this->model->whereIn( 'id' , $id )->get() );
 
         // Now delete the items from the database
-        $this->whereIn( 'id' , $id )->delete();
+        $this->model->whereIn( 'id' , $id )->delete();
 
         return true;
     }
@@ -72,12 +72,12 @@ class UploadsRepository extends EloquentBaseRepository implements UploadsInterfa
      */
     public function deleteByIdType( $id , $type ){
         // Delete the images directory for these types / links
-        $base_path = Config::get('ProductCatalog::app.upload_base_path');
+        $base_path = Config::get('laravel-bootstrap::app.upload_base_path');
         $toDelete  = public_path().'/'.$base_path.$type.'/'.$id;
         File::deleteDirectory( $toDelete );
 
         // Now return the result of deleting all the records that match
-        return $this->where('path','=',$type)->where('link_id','=',$id)->delete();
+        return $this->model->where('path','=',$type)->where('uploadable_id','=',$id)->delete();
     }
 
 /**
@@ -103,7 +103,7 @@ class UploadsRepository extends EloquentBaseRepository implements UploadsInterfa
                 // Loop through each item in the cache for this particular product ID
                 foreach( File::files($cache) as $cacheItem ){
                     // We want to remove the extension and the . to see if the thing exists
-                    $filename = $this->models->stripExtensions( $upload->filename );
+                    $filename = $this->model->stripExtensions( $upload->filename );
 
                     // If the path we have actually contains the filename we can remove it, given
                     // that the path is always a unique SHA1 checksum we shouldn't have any conflicts,
@@ -127,7 +127,7 @@ class UploadsRepository extends EloquentBaseRepository implements UploadsInterfa
     public function doUpload( $id , $type , $key )
     {
 
-        $base_path = Config::get('LaravelBootstrap::app.upload_base_path');
+        $base_path = Config::get('laravel-bootstrap::app.upload_base_path');
         // Setup some useful variables
         $randomKey  = sha1( time() . microtime() );
         $extension  = Input::file('file')->getClientOriginalExtension();

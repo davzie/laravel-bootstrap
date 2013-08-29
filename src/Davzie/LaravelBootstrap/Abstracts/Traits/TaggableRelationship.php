@@ -32,9 +32,10 @@ trait TaggableRelationship
      * @param  string $tags A comma separated list of tags
      * @return void
      */
-    public function saveTags()
+    public function saveTags( $tags = null )
     {
-        $tags = Input::get('tags',false);
+        $tags = is_null($tags) ? Input::get('tags',false) : $tags;
+
         // Delete all existing tags for this item
         $this->tags()->delete();
 

@@ -126,8 +126,9 @@ abstract class ObjectBaseController extends BaseController {
     public function getDelete( $id ){
         if( $this->deletable == false )
             return App::abort(404, 'Page not found');
+        
+        $model = $this->model->getById($id)->delete();
 
-        $this->model->getById($id)->delete();
         $message = 'The item was successfully removed.';
         return Redirect::to( $this->object_url )
                          ->with('success', new MessageBag( array( $message ) ) );
@@ -184,7 +185,9 @@ abstract class ObjectBaseController extends BaseController {
         if( !Request::ajax() or !$this->model->getById( $id ) )
             Response::json('error', 400);
 
-        $success = $this->uploads_model->doUpload( $id , get_class( $this->model->getModel() ) , $this->view_key );
+        $key = $this->model->getModel()->getTableName();
+        $type = get_class( $this->model->getModel() );
+        $success = $this->uploads_model->doUpload( $id , $type , $key );
 
         if(!$success)
             Response::json('error', 400);

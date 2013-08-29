@@ -1,6 +1,6 @@
 <?php namespace Davzie\LaravelBootstrap\Core;
 use Davzie\LaravelBootstrap\Core\Exceptions\NoValidationRulesFoundException;
-use Validator, Eloquent, ReflectionClass;
+use Validator, Eloquent, ReflectionClass, Input;
 
 class EloquentBaseModel extends Eloquent
 {
@@ -65,7 +65,26 @@ class EloquentBaseModel extends Eloquent
         if( $this->isTaggable() )
             $this->saveTags();
 
+        if( $this->isUploadable() )
+            $this->deleteImagery( Input::get('deleteImage') );
+
         return $this;
+    }
+
+    /**
+     * Delete method overrid
+     * @return void
+     */
+    public function delete()
+    {
+        if( $this->isTaggable() )
+            $this->saveTags('');
+
+        if( $this->isUploadable() )
+            $this->deleteAllImagery();
+
+
+        return parent::delete();
     }
 
     /**
@@ -92,7 +111,7 @@ class EloquentBaseModel extends Eloquent
      */
     public function getTableName()
     {
-        return $this->table();
+        return $this->table;
     }
 
 }

@@ -64,12 +64,12 @@ class Uploads extends EloquentBaseModel
     }
 
     public function getAbsolutePath(){
-        $base_path = Config::get('LaravelBootstrap::app.upload_base_path');
+        $base_path = Config::get('laravel-bootstrap::app.upload_base_path');
         return public_path().'/'.$base_path.$this->path.'/'.$this->uploadable_id.'/';
     }
 
     public function getPath(){
-        $base_path = Config::get('LaravelBootstrap::app.upload_base_path');
+        $base_path = Config::get('laravel-bootstrap::app.upload_base_path');
         return url( $base_path.$this->path.'/'.$this->uploadable_id.'/' );
     }
 
