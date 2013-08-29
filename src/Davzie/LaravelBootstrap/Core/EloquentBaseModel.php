@@ -1,6 +1,6 @@
 <?php namespace Davzie\LaravelBootstrap\Core;
-use Validator, Eloquent;
 use Davzie\LaravelBootstrap\Core\Exceptions\NoValidationRulesFoundException;
+use Validator, Eloquent, ReflectionClass;
 
 class EloquentBaseModel extends Eloquent
 {
@@ -55,4 +55,44 @@ class EloquentBaseModel extends Eloquent
 
         return $preparedRules;
     }
+
+    /**
+     * Hydrate the model with more stuff and 
+     * @return this
+     */
+    public function hydrate()
+    {
+        if( $this->isTaggable() )
+            $this->saveTags();
+
+        return $this;
+    }
+
+    /**
+     * Figure out if tags can be used on the model
+     * @return boolean
+     */
+    public function isTaggable()
+    {
+        return in_array( 'Davzie\LaravelBootstrap\Abstracts\Traits\TaggableRelationship' , ( new ReflectionClass( $this ) )->getTraitNames() );
+    }
+
+    /**
+     * Figure out if you can upload stuff here
+     * @return boolean
+     */
+    public function isUploadable()
+    {
+        return in_array( 'Davzie\LaravelBootstrap\Abstracts\Traits\UploadableRelationship' , ( new ReflectionClass( $this ) )->getTraitNames() );
+    }            
+
+    /**
+     * Return the table name
+     * @return string
+     */
+    public function getTableName()
+    {
+        return $this->table();
+    }
+
 }

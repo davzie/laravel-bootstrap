@@ -1,5 +1,4 @@
 <?php namespace Davzie\LaravelBootstrap\Core;
-
 use Davzie\LaravelBootstrap\Core\Exceptions\EntityNotFoundException;
 
 class EloquentBaseRepository

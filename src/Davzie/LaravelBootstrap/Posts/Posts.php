@@ -39,16 +39,4 @@ class Posts extends EloquentBaseModel
         $this->slug = Str::slug( $this->title , '-' );
     }
 
-    /**
-     * Hydrate the model with more stuff and 
-     * @return this
-     */
-    public function hydrate()
-    {
-        $this->saveTags( Input::get('tags') );
-        return $this;
-    }
-
-
-
 }

@@ -1,5 +1,6 @@
 <?php namespace Davzie\LaravelBootstrap\Abstracts\Traits;
 use Davzie\LaravelBootstrap\Tags\Tags as TagEloquent;
+use Input;
 
 trait TaggableRelationship
 {
@@ -31,8 +32,9 @@ trait TaggableRelationship
      * @param  string $tags A comma separated list of tags
      * @return void
      */
-    public function saveTags( $tags )
+    public function saveTags()
     {
+        $tags = Input::get('tags',false);
         // Delete all existing tags for this item
         $this->tags()->delete();
 

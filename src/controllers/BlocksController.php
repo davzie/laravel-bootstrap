@@ -4,12 +4,6 @@ use Davzie\LaravelBootstrap\Blocks\BlocksInterface;
 class BlocksController extends ObjectBaseController {
 
     /**
-     * Make the controller enabled image uploads
-     * @var boolean
-     */
-    protected $uploadable = true;
-
-    /**
      * The place to find the views / URL keys for this controller
      * @var string
      */
@@ -22,6 +16,7 @@ class BlocksController extends ObjectBaseController {
     {
         $this->model = $blocks;
         parent::__construct();
+        // dd( $this->model->getAllByTag('shit') );
     }
 
 }

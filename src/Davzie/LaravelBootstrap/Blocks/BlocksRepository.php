@@ -1,8 +1,11 @@
 <?php namespace Davzie\LaravelBootstrap\Blocks;
 use Davzie\LaravelBootstrap\Core\EloquentBaseRepository;
+use Davzie\LaravelBootstrap\Abstracts\Traits\TaggableRepository;
 
 class BlocksRepository extends EloquentBaseRepository implements BlocksInterface
 {
+
+    use TaggableRepository;
 
     /**
      * Construct Shit

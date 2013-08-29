@@ -28,7 +28,11 @@
                         <td><a href="{{ $edit_url.$item->id }}">{{ $item->id }}</a></td>
                         <td><a href="{{ $edit_url.$item->id }}">{{ $item->title }}</a></td>
                         <td><a href="{{ $edit_url.$item->id }}">{{ $item->created_at }}</a></td>
-                        <td><a href="{{ $edit_url.$item->id }}" class="btn btn-sm btn-primary">Edit Item</a> <a href="{{ $delete_url.$item->id }}" class="btn btn-sm btn-danger">Delete Item</a></td>
+                        <td>
+                            <div class="pull-right">
+                                <a href="{{ $edit_url.$item->id }}" class="btn btn-sm btn-primary">Edit Item</a> <a href="{{ $delete_url.$item->id }}" class="btn btn-sm btn-danger">Delete Item</a>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

@@ -1,11 +1,11 @@
-@extends('laravel-bootstrap::layouts.interface-edit')
+@extends('laravel-bootstrap::layouts.interface-new')
 
 @section('title')
-    Edit Post: {{ $item->title }}
+    Create New Post
 @stop
 
 @section('heading')
-    <h1>Edit Post: <small>{{ $item->title }}</small></h1>
+    <h1>Create New Post</h1>
 @stop
 
 @section('form-items')
@@ -13,13 +13,13 @@
     <div class="form-group">
         {{ Form::label( "title" , 'Post Title' , array( 'class'=>'col-lg-2 control-label' ) ) }}
         <div class="col-lg-10">
-            {{ Form::text( "title" , Input::old( "title" , $item->title ) , array( 'class'=>'form-control' , 'placeholder'=>'Post Title' ) ) }}
+            {{ Form::text( "title" , Input::old( "title" ) , array( 'class'=>'form-control' , 'placeholder'=>'Post Title' ) ) }}
         </div>
     </div>
     <div class="form-group">
         {{ Form::label( "content" , 'Post Content' , array( 'class'=>'col-lg-2 control-label' ) ) }}
         <div class="col-lg-10">
-            {{ Form::textarea( "content" , Input::old( "content" , $item->content ) , array( 'class'=>'form-control rich' , 'placeholder'=>'Post Content' ) ) }}
+            {{ Form::textarea( "content" , Input::old( "content" ) , array( 'class'=>'form-control rich' , 'placeholder'=>'Post Content' ) ) }}
         </div>
     </div>
     

@@ -126,6 +126,47 @@ abstract class ObjectBaseController extends BaseController {
     }
 
     /**
+     * The new object method, very generic, just allows mass assignable stuff to be filled and saved
+     * @return Redirect
+     */
+    public function postNew()
+    {
+        $record = $this->model->getNew();
+        $record->fill( Input::all() );
+
+        if( !$record->isValid() )
+            return Redirect::to( $this->new_url )->with( 'errors' , $record->getErrors() );
+
+        // Run the hydration method that populates anything else that is required / runs any other
+        // model interactions and save it.
+        $record->save();
+
+        // Redirect that shit man! You did good! Validated and saved, man mum would be proud!
+        return Redirect::to( $this->object_url )->with( 'success' , new MessageBag( array( 'Item Created' ) ) );
+    }
+
+    /**
+     * The method to handle the posted data
+     * @param  integer $id The ID of the object
+     * @return Redirect
+     */
+    public function postEdit( $id )
+    {
+        $record = $this->model->requireById( $id );
+        $record->fill( Input::all() );
+
+        if( !$record->isValid() )
+            return Redirect::to( $this->edit_url.$id )->with( 'errors' , $record->getErrors() );
+
+        // Run the hydration method that populates anything else that is required / runs any other
+        // model interactions and save it.
+        $record->hydrate()->save();
+
+        // Redirect that shit man! You did good! Validated and saved, man mum would be proud!
+        return Redirect::to( $this->object_url )->with( 'success' , new MessageBag( array( 'Item Saved' ) ) );
+    }
+
+    /**
      * Upload an image for this product ID
      * @return Response
      */
@@ -200,10 +241,10 @@ abstract class ObjectBaseController extends BaseController {
     private function setTraitableProperties()
     {
         if( is_null( $this->taggable ) )
-            $this->taggable = in_array( 'Davzie\LaravelBootstrap\Abstracts\Traits\TaggableRelationship' , ( new ReflectionClass( $this->model->getModel() ) )->getTraitNames() );
+            $this->taggable = $this->model->getModel()->isTaggable();
 
         if( is_null( $this->uploadable ) )
-            $this->uploadable = in_array( 'Davzie\LaravelBootstrap\Abstracts\Traits\UploadableRelationship' , ( new ReflectionClass( $this->model->getModel() ) )->getTraitNames() );
+            $this->uploadable = $this->model->getModel()->isUploadable();
 
     }
     
