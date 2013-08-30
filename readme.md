@@ -1,6 +1,6 @@
 ## Laravel 4 Bootstrap
 --------------------------------------
-A Laravel 4 CMS using Bootstrap 3. Laravel Bootstrap does not handle the front-end of your site. It merely provides a CRUD framework with some predefined systems (image gallery, pages etc) for you to enter and edit your data with.
+A Laravel 4 **PHP 5.4** CMS using Bootstrap 3. Laravel Bootstrap does not handle the front-end of your site. It merely provides a CRUD framework with some predefined systems (image gallery, pages etc) for you to enter and edit your data with.
 
 It uses Redactor JS for content editing and provides a really simple way to prototype new 'objects'. You can make objects 'taggable' and 'uploadable' which means you can have unlimited number of tags associated with an item and also unlimited number of image uploads too.
 
