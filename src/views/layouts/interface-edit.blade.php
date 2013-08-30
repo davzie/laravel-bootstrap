@@ -31,9 +31,9 @@
         @if( isset($uploadable) and $uploadable )
                 </div>
                 <div class="col-12 col-md-4 col-lg-4">
-                    <h4>Upload Product Images</h4>
+                    <h4>Upload Item Images</h4>
                     <p>Drag and drop images into the box below or simply click it to select files to upload</p>
-                    <p><strong>Note: </strong>This will also save and refresh this product page.</p>
+                    <p><strong>Note: </strong>This will also save and refresh this page.</p>
                     {{ Form::open( [ 'url' => $object_url.'/upload/'.$item->id , 'class' => 'dropzone square' , 'id'=>'imageUploads' , 'files'=>true ] ) }}
                         <div class="fallback">
                             <input name="file" type="file" multiple />
