@@ -1,31 +1,54 @@
 @extends('laravel-bootstrap::layouts.interface-new')
 
 @section('title')
-    Create New Content Blocks
+    Create New User
 @stop
 
 @section('heading')
-    <h1>Create New Content Block</h1>
+    <h1>Create New User</h1>
 @stop
 
 @section('form-items')
 
+    {{-- The first name form item --}}
     <div class="form-group">
-        {{ Form::label( "title" , 'Block Title' , array( 'class'=>'col-lg-2 control-label' ) ) }}
+        {{ Form::label( "first_name" , 'First Name' , array( 'class'=>'col-lg-2 control-label' ) ) }}
         <div class="col-lg-10">
-            {{ Form::text( "title" , Input::old( "title" ) , array( 'class'=>'form-control' , 'placeholder'=>'Block Title' ) ) }}
+            {{ Form::text( "first_name" , Input::old( "first_name" ) , array( 'class'=>'form-control' , 'placeholder'=>'First Name' ) ) }}
         </div>
     </div>
+
+    {{-- The last name form item --}}
     <div class="form-group">
-        {{ Form::label( "key" , 'Block Key' , array( 'class'=>'col-lg-2 control-label' ) ) }}
+        {{ Form::label( "last_name" , 'Last Name' , array( 'class'=>'col-lg-2 control-label' ) ) }}
         <div class="col-lg-10">
-            {{ Form::text( "key" , Input::old( "key" ) , array( 'class'=>'form-control' , 'placeholder'=>'Block Key' ) ) }}
+            {{ Form::text( "last_name" , Input::old( "last_name" ) , array( 'class'=>'form-control' , 'placeholder'=>'Last Name' ) ) }}
         </div>
     </div>
+
+    {{-- The email form item --}}
     <div class="form-group">
-        {{ Form::label( "content" , 'Block Content' , array( 'class'=>'col-lg-2 control-label' ) ) }}
+        {{ Form::label( "email" , 'Email' , array( 'class'=>'col-lg-2 control-label' ) ) }}
         <div class="col-lg-10">
-            {{ Form::textarea( "content" , Input::old( "content" ) , array( 'class'=>'form-control rich' , 'placeholder'=>'Block Content' ) ) }}
+            {{ Form::text( "email" , Input::old( "email" ) , array( 'class'=>'form-control' , 'placeholder'=>'Email' ) ) }}
+        </div>
+    </div>
+
+    <h3>Authentication</h3>
+
+    {{-- The password form item --}}
+    <div class="form-group">
+        {{ Form::label( "password" , 'New Password' , array( 'class'=>'col-lg-2 control-label' ) ) }}
+        <div class="col-lg-10">
+            {{ Form::password( "password" , array( 'class'=>'form-control' , 'placeholder'=>'Enter New Password' ) ) }}
+        </div>
+    </div>
+
+    {{-- The password confirmation form item --}}
+    <div class="form-group">
+        {{ Form::label( "password_confirmation" , 'Confirm' , array( 'class'=>'col-lg-2 control-label' ) ) }}
+        <div class="col-lg-10">
+            {{ Form::password( "password_confirmation" , array( 'class'=>'form-control' , 'placeholder'=>'Confirm New Password' ) ) }}
         </div>
     </div>
     

@@ -2,9 +2,11 @@
 use Davzie\LaravelBootstrap\Core\EloquentBaseModel;
 use Illuminate\Auth\UserInterface as LaravelUserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Hash;
 
 class User extends EloquentBaseModel implements LaravelUserInterface, RemindableInterface
 {
+    // The Tables
     protected $table    = 'users';
 
     /**
@@ -18,12 +20,13 @@ class User extends EloquentBaseModel implements LaravelUserInterface, Remindable
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = array('first_name', 'last_name', 'email');
+    protected $fillable = array('first_name', 'last_name', 'email', 'password');
 
     protected $validationRules = [
         'first_name'    => 'required',
         'last_name'   => 'required',
-        'email' => 'required|email'
+        'email' => 'required|email',
+        'password' => 'confirmed|min:5'
     ];
 
     /**
@@ -62,6 +65,15 @@ class User extends EloquentBaseModel implements LaravelUserInterface, Remindable
     public function getReminderEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set the password, lets automatically hash it
+     * @param string $value The password (unhashed)
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make( $value );
     }
 
 }

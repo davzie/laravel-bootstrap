@@ -64,6 +64,15 @@ abstract class ObjectBaseController extends BaseController {
      */
     protected $uploads_model;
 
+    /**
+     * By default a mass assignment is used to validate things on a model
+     * Sometimes you want to confirm inputs (such as password confirmations)
+     * that you don't want to be necessarily stored on the model. This will validate
+     * inputs from Input::all() not from $model->fill();
+     * @var boolean
+     */
+    protected $validateWithInput = true;
+
     public function __construct()
     {
         parent::__construct();
@@ -143,7 +152,9 @@ abstract class ObjectBaseController extends BaseController {
         $record = $this->model->getNew();
         $record->fill( Input::all() );
 
-        if( !$record->isValid() )
+        $valid = $this->validateWithInput === true ? $record->isValid( Input::all() ) : $record->isValid();
+
+        if( !$valid )
             return Redirect::to( $this->new_url )->with( 'errors' , $record->getErrors() );
 
         // Run the hydration method that populates anything else that is required / runs any other
@@ -164,7 +175,9 @@ abstract class ObjectBaseController extends BaseController {
         $record = $this->model->requireById( $id );
         $record->fill( Input::all() );
 
-        if( !$record->isValid() )
+        $valid = $this->validateWithInput === true ? $record->isValid( Input::all() ) : $record->isValid();
+
+        if( !$valid )
             return Redirect::to( $this->edit_url.$id )->with( 'errors' , $record->getErrors() );
 
         // Run the hydration method that populates anything else that is required / runs any other
