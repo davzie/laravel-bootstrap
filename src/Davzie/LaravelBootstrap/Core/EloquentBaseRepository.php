@@ -85,7 +85,7 @@ class EloquentBaseRepository
         return $model;
     }
 
-    public function getNew($attributes = array())
+    public function getNew( $attributes = array() )
     {
         return $this->model->newInstance($attributes);
     }

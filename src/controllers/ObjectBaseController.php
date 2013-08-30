@@ -71,7 +71,7 @@ abstract class ObjectBaseController extends BaseController {
      * inputs from Input::all() not from $model->fill();
      * @var boolean
      */
-    protected $validateWithInput = true;
+    protected $validateWithInput = false;
 
     public function __construct()
     {
@@ -149,8 +149,7 @@ abstract class ObjectBaseController extends BaseController {
      */
     public function postNew()
     {
-        $record = $this->model->getNew();
-        $record->fill( Input::all() );
+        $record = $this->model->getNew( Input::all() );
 
         $valid = $this->validateWithInput === true ? $record->isValid( Input::all() ) : $record->isValid();
 
