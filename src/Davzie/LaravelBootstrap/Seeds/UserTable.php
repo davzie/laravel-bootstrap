@@ -16,6 +16,7 @@ class UserTable extends Seeder {
                 'first_name'    => Config::get('laravel-bootstrap::setup.first-name'),
                 'last_name'     => Config::get('laravel-bootstrap::setup.last-name'),
                 'password'      => Hash::make( Config::get('laravel-bootstrap::setup.password') ),
+                'last_login'    => date('Y-m-d H:i:s'),
             ]
         ];
         DB::table('users')->insert($types);
