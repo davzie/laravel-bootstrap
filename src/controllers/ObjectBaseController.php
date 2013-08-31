@@ -154,7 +154,7 @@ abstract class ObjectBaseController extends BaseController {
         $valid = $this->validateWithInput === true ? $record->isValid( Input::all() ) : $record->isValid();
 
         if( !$valid )
-            return Redirect::to( $this->new_url )->with( 'errors' , $record->getErrors() );
+            return Redirect::to( $this->new_url )->with( 'errors' , $record->getErrors() )->withInput();
 
         // Run the hydration method that populates anything else that is required / runs any other
         // model interactions and save it.
@@ -177,7 +177,7 @@ abstract class ObjectBaseController extends BaseController {
         $valid = $this->validateWithInput === true ? $record->isValid( Input::all() ) : $record->isValid();
 
         if( !$valid )
-            return Redirect::to( $this->edit_url.$id )->with( 'errors' , $record->getErrors() );
+            return Redirect::to( $this->edit_url.$id )->with( 'errors' , $record->getErrors() )->withInput();
 
         // Run the hydration method that populates anything else that is required / runs any other
         // model interactions and save it.
