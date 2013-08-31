@@ -55,7 +55,7 @@
 
                 // Setup some options for our Dropzone
                 Dropzone.options.imageUploads = {
-                    maxFilesize: 3,
+                    maxFilesize: 5,
                     init: function(){
 
                         // When a file has completed uploading, check to see if others are queueing, if not then submit the form
