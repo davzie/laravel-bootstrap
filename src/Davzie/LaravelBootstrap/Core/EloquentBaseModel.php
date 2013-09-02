@@ -2,6 +2,9 @@
 use Davzie\LaravelBootstrap\Core\Exceptions\NoValidationRulesFoundException;
 use Validator, Eloquent, ReflectionClass, Input;
 
+/**
+ * Base Eloquent Class Built On From Shawn McCool <-- This guy is pretty amazing
+ */
 class EloquentBaseModel extends Eloquent
 {
     protected $validationRules = [];

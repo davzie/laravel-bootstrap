@@ -1,6 +1,9 @@
 <?php namespace Davzie\LaravelBootstrap\Core;
 use Davzie\LaravelBootstrap\Core\Exceptions\EntityNotFoundException;
 
+/**
+ * Base Eloquent Repository Class Built On From Shawn McCool <-- This guy is pretty amazing
+ */
 class EloquentBaseRepository
 {
     protected $model;
