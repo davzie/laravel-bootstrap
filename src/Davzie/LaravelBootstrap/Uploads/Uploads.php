@@ -52,7 +52,7 @@ class Uploads extends EloquentBaseModel
      * @return string
      */
     public function getSrc(){
-        return $this->getPath().$this->filename;
+        return $this->getPath().'/'.$this->filename;
     }
 
     /**
@@ -70,7 +70,7 @@ class Uploads extends EloquentBaseModel
 
     public function getPath(){
         $base_path = Config::get('laravel-bootstrap::app.upload_base_path');
-        return url( $base_path.$this->path.'/'.$this->uploadable_id.'/' );
+        return url( $base_path.$this->path.'/'.$this->uploadable_id );
     }
 
 }
