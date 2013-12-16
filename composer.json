@@ -9,8 +9,8 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "4.1.x",
-        "intervention/image": "dev-master"
+        "intervention/image": "1.5.2",
+        "illuminate/support": "4.1.x"
     },
     "autoload": {
         "classmap": [
