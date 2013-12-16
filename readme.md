@@ -1,13 +1,13 @@
-## A Laravel 4 Bootstrap CMS
+## A Laravel 4.1 Bootstrap CMS
 --------------------------------------
-A Laravel 4 **PHP 5.4** CMS using Bootstrap 3. Laravel Bootstrap does not handle the front-end of your site. It merely provides a CRUD framework with some predefined systems (image gallery, pages etc) for you to enter and edit your data with.
+A Laravel 4.1 **PHP 5.4** CMS using Bootstrap 3. Laravel Bootstrap does not handle the front-end of your site. It merely provides a CRUD framework with some predefined systems (image gallery, pages etc) for you to enter and edit your data with.
 
 It uses Redactor JS for content editing and provides a really simple way to prototype new 'objects'. You can make objects 'taggable' and 'uploadable' which means you can have unlimited number of tags associated with an item and also unlimited number of image uploads too.
 
 ## Composer Require
 Nice and simple
 
-    "davzie/laravel-bootstrap": "dev-master"
+    "davzie/laravel-bootstrap": "1.*"
 
 ### Linking The Service Provider To Your Installation
 Add this string to your array of providers in app/config/app.php
