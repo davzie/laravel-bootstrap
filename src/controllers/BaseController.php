@@ -1,6 +1,6 @@
 <?php
 namespace Davzie\LaravelBootstrap\Controllers;
-use Illuminate\Routing\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use View, Config;
 
 abstract class BaseController extends Controller{
