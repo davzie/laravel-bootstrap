@@ -5,7 +5,7 @@ App::bind('Davzie\LaravelBootstrap\Posts\PostsInterface', function(){
     return new Davzie\LaravelBootstrap\Posts\PostsRepository( new Davzie\LaravelBootstrap\Posts\Posts );
 });
 
-// The Posts Bindings
+// The Users Bindings
 App::bind('Davzie\LaravelBootstrap\Accounts\UserInterface', function(){
     return new Davzie\LaravelBootstrap\Accounts\UserRepository( new Davzie\LaravelBootstrap\Accounts\User );
 });
@@ -30,7 +30,7 @@ App::bind('Davzie\LaravelBootstrap\Uploads\UploadsInterface', function(){
     return new Davzie\LaravelBootstrap\Uploads\UploadsRepository( new Davzie\LaravelBootstrap\Uploads\Uploads );
 });
 
-// The Uploads Bindings
+// The Galleries Bindings
 App::bind('Davzie\LaravelBootstrap\Galleries\GalleriesInterface', function(){
     return new Davzie\LaravelBootstrap\Galleries\GalleriesRepository( new Davzie\LaravelBootstrap\Galleries\Galleries );
 });
