@@ -134,6 +134,12 @@ class UploadsRepository extends EloquentBaseRepository implements UploadsInterfa
         $filename   = $randomKey.'.'.$extension;
         $path       = '/'.$base_path.'/' . $key . '/' . $id;
 
+        // Check if the folder exists on upload, create it if it doesn't
+        if( !File::isDirectory( public_path().'/'.$base_path ) )
+        {
+            File::makeDirectory( public_path().'/'.$base_path , 0777 );
+        }
+
         // Move the file and determine if it was succesful or not
         $upload_success = Input::file('file')->move( public_path() . $path , $filename );
 
