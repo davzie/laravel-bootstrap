@@ -1,5 +1,7 @@
 ## A Laravel 4.1 Bootstrap CMS
 --------------------------------------
+**Screencasts:** [Laravel Bootstrap YouTube Playlist](http://www.youtube.com/playlist?list=PL8isL2kTKzMOm1MBVGYSbBuRN3Yi0i7wu)
+
 A Laravel 4.1 **PHP 5.4** CMS using Bootstrap 3. Laravel Bootstrap does not handle the front-end of your site. It merely provides a CRUD framework with some predefined systems (image gallery, pages etc) for you to enter and edit your data with.
 
 ![Laravel Bootstrap Screenshot](http://i.imgur.com/CiUa8wt.png "Laravel Bootstrap Screenshot")
