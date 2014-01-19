@@ -16,4 +16,13 @@ class BlocksRepository extends EloquentBaseRepository implements BlocksInterface
         $this->model = $blocks;
     }
 
+    /**
+     * Get all the blocks where the key is equal to the item you mention
+     * @return Eloquent
+     */
+    public function getByKey($key)
+    {
+        return $this->model->where('key','=',$key)->first();
+    }
+
 }
