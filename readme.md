@@ -32,4 +32,4 @@ You need assets bro!
 Seed the database, this pretty much just seeds an example user and settings. Migration is pretty simple, ensure your database config is setup and run this:
 
     php artisan migrate --package="davzie/laravel-bootstrap"
-    php artisan db:seed --class="Davzie\\LaravelBootstrap\\Seeds\\DatabaseSeeder"
+    php artisan db:seed --class="Davzie\LaravelBootstrap\Seeds\DatabaseSeeder"
