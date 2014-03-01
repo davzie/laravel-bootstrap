@@ -2,6 +2,7 @@
 namespace Davzie\LaravelBootstrap\Seeds;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 
 class ExampleSettingsSeeder extends Seeder {
 
@@ -12,7 +13,7 @@ class ExampleSettingsSeeder extends Seeder {
             [
                 'key'           => 'application_name',
                 'label'         => 'Application Name',
-                'value'         => 'Laravel Bootstrap'
+                'value'         => Config::get('laravel-bootstrap::app.name')
             ]
         ];
         DB::table('settings')->insert($types);
