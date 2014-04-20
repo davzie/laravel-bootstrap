@@ -119,7 +119,7 @@ abstract class ObjectBaseController extends BaseController {
         } catch( EntityNotFoundException $e ){
             return Redirect::to( $this->object_url )->with('errors', new MessageBag( array("An item with the ID:$id could not be found.") ) );
         }
-        
+
         if( !View::exists( 'laravel-bootstrap::'.$this->view_key.'.edit' ) )
             return App::abort(404, 'Page not found');
 
@@ -135,7 +135,7 @@ abstract class ObjectBaseController extends BaseController {
     public function getDelete( $id ){
         if( $this->deletable == false )
             return App::abort(404, 'Page not found');
-        
+
         $model = $this->model->getById($id)->delete();
 
         $message = 'The item was successfully removed.';
@@ -181,7 +181,7 @@ abstract class ObjectBaseController extends BaseController {
 
         // Run the hydration method that populates anything else that is required / runs any other
         // model interactions and save it.
-        $record->hydrate()->save();
+        $record->hydrateRelations()->save();
 
         // Redirect that shit man! You did good! Validated and saved, man mum would be proud!
         return Redirect::to( $this->edit_url.$id )->with( 'success' , new MessageBag( array( 'Item Saved' ) ) );
@@ -278,5 +278,5 @@ abstract class ObjectBaseController extends BaseController {
             $this->uploadable = $this->model->getModel()->isUploadable();
 
     }
-    
+
 }

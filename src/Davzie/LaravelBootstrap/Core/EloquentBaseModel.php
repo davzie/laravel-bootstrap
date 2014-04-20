@@ -60,10 +60,10 @@ class EloquentBaseModel extends Eloquent
     }
 
     /**
-     * Hydrate the model with more stuff and 
+     * Hydrate the model with more stuff and
      * @return this
      */
-    public function hydrate()
+    public function hydrateRelations()
     {
         if( $this->isTaggable() )
             $this->saveTags();
@@ -106,7 +106,7 @@ class EloquentBaseModel extends Eloquent
     public function isUploadable()
     {
         return in_array( 'Davzie\LaravelBootstrap\Abstracts\Traits\UploadableRelationship' , ( new ReflectionClass( $this ) )->getTraitNames() );
-    }            
+    }
 
     /**
      * Return the table name
