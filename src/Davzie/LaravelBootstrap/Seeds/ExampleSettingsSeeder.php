@@ -13,7 +13,9 @@ class ExampleSettingsSeeder extends Seeder {
             [
                 'key'           => 'application_name',
                 'label'         => 'Application Name',
-                'value'         => Config::get('laravel-bootstrap::app.name')
+                'value'         => Config::get('laravel-bootstrap::app.name'),
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s')
             ]
         ];
         DB::table('settings')->insert($types);
