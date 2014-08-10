@@ -10,7 +10,7 @@
     "require": {
         "php": ">=5.4.0",
         "intervention/image": "1.5.2",
-        "illuminate/support": "4.1.x"
+        "illuminate/support": "4.2.x"
     },
     "autoload": {
         "classmap": [
