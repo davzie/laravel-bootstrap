@@ -1,4 +1,4 @@
-## [DEPRECIATED] A Laravel 4.1 Bootstrap CMS
+## [DEPRECATED] A Laravel 4.1 Bootstrap CMS
 --------------------------------------
 **Screencasts:** [Laravel Bootstrap YouTube Playlist](http://www.youtube.com/playlist?list=PL8isL2kTKzMOm1MBVGYSbBuRN3Yi0i7wu)
 
